@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculate BMI</title>
+	<script type="text/javascript" src="vue.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+	<div id="app">
+		<div align="center">
+			<h1>{{message}}</h1>
+			<table cellpadding="20">
+				<tr>
+					<td style="background-color: blue;color: white;width: 100px;">UnderWeight <19</td>
+					<td style="background-color: green;color: white;width: 100px;">NormalWeight 19 to 25</td>
+					<td style="background-color: tomato;color: white;width: 100px;">OverWeight 25 to 30</td>
+					<td style="background-color: red;color: white;width: 100px;">Obese >30</td>
+
+				</tr>
+	  		</table><br><br>
+        <div class="row">
+            <div class=" col-md-12 my-5">
+                <span>Enter your height :  {{ height }}</span>
+                <input v-model="height"> CM<br><br><br>
+                <span>Enter your weight :  {{ weight }}</span>
+                <input v-model="weight"> KG
+              
+            </div>
+        </div><br><br>
+        <button v-on:click="calculate" style="border-radius: 50px;background-color:skyblue">Calculate</button><br><br>
+        <label>Your BMI is :</label>
+        <input v-if="bmi>1 && bmi<19" type="text" style="background-color: blue;width: 300px;height: 40px;text-align: center;border:0" value="UnderWeight">
+        <input v-else-if="bmi>19 && bmi<25" type="text" style="background-color: green;width: 300px;height: 40px;border:0;text-align: center" value="NormalWeight">
+        <input v-else-if="bmi>25 && bmi<30" type="text" style="background-color: tomato;width: 300px;height: 40px;border:0;text-align: center" value="OverWeight">
+        <input v-else-if="bmi>30" type="text" style="background-color: red;width: 300px;height: 40px;border:0;text-align: center;" value="Obese">
+        
+    </div>
+</div>
+	</div>
+
+	<script type="text/javascript">
+		var app = new Vue({
+					  el: '#app',
+					  data: {
+					  	message: 'BMI Calculator',
+					    height: null ,
+					    weight: null,
+					    bmi:null
+					  },
+					
+
+					methods: {
+						    calculate() {
+						      var weight = parseInt(this.weight);
+						      var height = parseInt(this.height) / 100;
+						      this.bmi = weight / (height * height)
+						      
+						    }
+						  }
+						})
+
+
+	</script>
+
+</body>
+</html>
